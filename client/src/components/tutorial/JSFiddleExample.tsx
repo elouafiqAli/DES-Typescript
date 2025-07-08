@@ -23,6 +23,7 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
   const handleRunCode = async () => {
     if (isRunning) return;
     
+    console.log('Run Code button clicked!'); // Debug log
     setIsRunning(true);
     try {
       // Clear previous output
@@ -124,12 +125,12 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
 
   return (
     <div className="bg-white border border-gray-200 rounded-lg overflow-hidden mb-8">
-      <div className="bg-github-bg px-6 py-3 border-b border-gray-200 flex justify-between items-center">
-        <h3 className="text-lg font-semibold text-github-text">{title}</h3>
-        <div className="flex gap-2">
+      <div className="bg-gray-100 px-6 py-4 border-b border-gray-300 flex justify-between items-center">
+        <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+        <div className="flex gap-3">
           <button
             onClick={handleReset}
-            className="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600 transition-colors flex items-center gap-2"
+            className="bg-gray-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600 transition-colors flex items-center gap-2 shadow-sm"
           >
             <RotateCcw className="w-4 h-4" />
             Reset
@@ -137,10 +138,11 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
           <button
             onClick={handleRunCode}
             disabled={isRunning}
-            className="bg-github-blue text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-red-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-red-700 transition-all duration-200 flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl border-4 border-red-800 min-w-[160px] transform hover:scale-105"
+            style={{ backgroundColor: isRunning ? '#dc2626' : '#ef4444' }}
           >
-            <Play className={`w-4 h-4 ${isRunning ? 'animate-spin' : ''}`} />
-            {isRunning ? 'Running...' : 'Run Code'}
+            <Play className={`w-6 h-6 ${isRunning ? 'animate-spin' : ''}`} />
+            {isRunning ? 'Running...' : '▶️ RUN CODE'}
           </button>
         </div>
       </div>
@@ -173,6 +175,18 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
                 searchKeymap: true
               }}
             />
+          </div>
+          
+          {/* Additional Run Button below editor */}
+          <div className="mt-4 text-center">
+            <button
+              onClick={handleRunCode}
+              disabled={isRunning}
+              className="bg-blue-600 text-white px-12 py-3 rounded-lg text-base font-bold hover:bg-blue-700 transition-all duration-200 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg mx-auto"
+            >
+              <Play className={`w-5 h-5 ${isRunning ? 'animate-spin' : ''}`} />
+              {isRunning ? 'Executing Code...' : '🚀 RUN JAVASCRIPT CODE'}
+            </button>
           </div>
         </div>
         
