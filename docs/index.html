@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Fundamentals Tutorial</title>
+    <meta name="description" content="Learn JavaScript fundamentals with interactive examples and hands-on coding exercises. Run JavaScript code directly in your browser!" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/javascript/javascript.min.js"></script>
+    
+    <style>
+      .CodeMirror { 
+        height: 300px; 
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      .output-console {
+        background: #1e1e1e;
+        color: #d4d4d4;
+        font-family: 'Courier New', monospace;
+        padding: 12px;
+        border-radius: 4px;
+        min-height: 120px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <h1 class="text-xl font-semibold text-gray-800">JavaScript Fundamentals</h1>
+            <span class="ml-2 px-2 py-1 bg-blue-100 text-xs font-medium rounded-full text-blue-800">Tutorial</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Introduction -->
+      <section class="mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 mb-4">Getting Started with JavaScript</h2>
+        <p class="text-lg text-gray-600 leading-relaxed mb-6">
+          JavaScript is a versatile programming language that powers modern web applications. 
+          This tutorial will guide you through the fundamentals with interactive examples and hands-on coding exercises.
+        </p>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-blue-900 mb-3">What You'll Learn</h3>
+          <ul class="space-y-2 text-blue-800">
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              Variable declarations and data types
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              Function creation and invocation
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              Working with objects and arrays
+            </li>
+            <li class="flex items-start">
+              <span class="text-blue-600 mr-2">✓</span>
+              DOM manipulation and event handling
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Interactive Example 1 -->
+      <section class="mb-12">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">Interactive Code Editor</h2>
+        <p class="text-gray-600 mb-6">Try editing and running JavaScript code directly in your browser!</p>
+        
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+          <div class="bg-gray-100 px-6 py-4 border-b border-gray-300 flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-gray-800">JS Playground: Variables & Functions</h3>
+            <button onclick="runCode1()" class="bg-green-600 text-white px-6 py-3 rounded-lg text-sm font-bold hover:bg-green-700 transition-colors">
+              ▶️ RUN CODE
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            <div class="p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
+              <h4 class="font-medium text-gray-800 mb-2">JavaScript Code:</h4>
+              <textarea id="code1" class="code-editor">// Try modifying this code!
+let name = "Alice";
+let age = 25;
+
+function greet(person, years) {
+    return `Hello ${person}! You are ${years} years old.`;
+}
+
+function calculateBirthYear(currentAge) {
+    return new Date().getFullYear() - currentAge;
+}
+
+// Run some code
+console.log(greet(name, age));
+console.log(`Birth year: ${calculateBirthYear(age)}`);
+
+// Try adding your own code below:
+// let yourName = "Your Name";
+// console.log(greet(yourName, 30));</textarea>
+            </div>
+            
+            <div class="p-4">
+              <h4 class="font-medium text-gray-800 mb-2">Output:</h4>
+              <div id="output1" class="output-console">Click 'RUN CODE' to see the results</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Example 2 -->
+      <section class="mb-12">
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+          <div class="bg-gray-100 px-6 py-4 border-b border-gray-300 flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-gray-800">JS Playground: Arrays & Objects</h3>
+            <button onclick="runCode2()" class="bg-blue-600 text-white px-6 py-3 rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors">
+              ▶️ RUN CODE
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            <div class="p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
+              <h4 class="font-medium text-gray-800 mb-2">JavaScript Code:</h4>
+              <textarea id="code2" class="code-editor">// Working with arrays and objects
+const students = [
+    { name: "John", grade: 85, subject: "Math" },
+    { name: "Sarah", grade: 92, subject: "Science" },
+    { name: "Mike", grade: 78, subject: "English" }
+];
+
+// Function to calculate average grade
+function calculateAverage(studentList) {
+    const total = studentList.reduce((sum, student) => sum + student.grade, 0);
+    return total / studentList.length;
+}
+
+// Function to find top student
+function findTopStudent(studentList) {
+    return studentList.reduce((top, current) => 
+        current.grade > top.grade ? current : top
+    );
+}
+
+// Display results
+console.log("All students:", students);
+console.log("Average grade:", calculateAverage(students));
+console.log("Top student:", findTopStudent(students));
+
+// Try adding more students or functions!</textarea>
+            </div>
+            
+            <div class="p-4">
+              <h4 class="font-medium text-gray-800 mb-2">Output:</h4>
+              <div id="output2" class="output-console">Click 'RUN CODE' to see the results</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Example 3 - DOM Manipulation -->
+      <section class="mb-12">
+        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+          <div class="bg-gray-100 px-6 py-4 border-b border-gray-300 flex justify-between items-center">
+            <h3 class="text-lg font-semibold text-gray-800">JS Playground: DOM Manipulation</h3>
+            <button onclick="runCode3()" class="bg-purple-600 text-white px-6 py-3 rounded-lg text-sm font-bold hover:bg-purple-700 transition-colors">
+              ▶️ RUN CODE
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+            <div class="p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
+              <h4 class="font-medium text-gray-800 mb-2">JavaScript Code:</h4>
+              <textarea id="code3" class="code-editor">// DOM Manipulation Example
+// Create and modify HTML elements
+
+// Create a new element
+const newDiv = document.createElement('div');
+newDiv.innerHTML = '<h3>🎉 Created with JavaScript!</h3>';
+newDiv.style.background = '#e7f3ff';
+newDiv.style.padding = '15px';
+newDiv.style.borderRadius = '8px';
+newDiv.style.margin = '10px 0';
+
+// Add to demo area
+const demoArea = document.getElementById('demo-area');
+demoArea.appendChild(newDiv);
+
+// Create a button
+const btn = document.createElement('button');
+btn.textContent = 'Click me!';
+btn.className = 'bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600';
+btn.onclick = () => {
+    alert('Hello from JavaScript!');
+};
+demoArea.appendChild(btn);
+
+console.log('DOM elements created successfully!');
+console.log('Check the demo area below ↓');</textarea>
+            </div>
+            
+            <div class="p-4">
+              <h4 class="font-medium text-gray-800 mb-2">Output:</h4>
+              <div id="output3" class="output-console mb-4">Click 'RUN CODE' to see the results</div>
+              
+              <h4 class="font-medium text-gray-800 mb-2">Live Demo Area:</h4>
+              <div id="demo-area" class="min-h-[100px] bg-gray-50 border-2 border-dashed border-gray-300 rounded-lg p-4">
+                <p class="text-gray-500">Run the code to see DOM manipulation in action!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Completion -->
+      <section class="mb-12">
+        <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+          <h3 class="text-lg font-semibold text-green-900 mb-3">Congratulations! 🎉</h3>
+          <p class="text-green-800 mb-4">
+            You've completed the JavaScript Fundamentals tutorial. You now have a solid foundation in variables, functions, objects, and arrays.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors">
+              Download Certificate
+            </button>
+            <a href="https://github.com/elouafiqali/DES-Typescript" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors inline-block">
+              View Source Code
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 border-t border-gray-200 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="text-gray-600 text-sm">
+            © 2024 JavaScript Fundamentals Tutorial. Published with GitHub Pages.
+          </div>
+          <div class="flex space-x-6 mt-4 md:mt-0">
+            <a href="https://github.com/elouafiqali/DES-Typescript" class="text-gray-600 hover:text-blue-600 transition-colors">GitHub</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Issues</a>
+            <a href="#" class="text-gray-600 hover:text-blue-600 transition-colors">Contributing</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Initialize CodeMirror editors
+      const editors = {};
+      
+      function initializeEditor(id) {
+        const textarea = document.getElementById(id);
+        editors[id] = CodeMirror.fromTextArea(textarea, {
+          mode: 'javascript',
+          theme: 'monokai',
+          lineNumbers: true,
+          autoCloseBrackets: true,
+          matchBrackets: true,
+          indentUnit: 2,
+          tabSize: 2
+        });
+      }
+      
+      // Initialize all editors
+      window.addEventListener('load', () => {
+        initializeEditor('code1');
+        initializeEditor('code2');
+        initializeEditor('code3');
+      });
+      
+      function runCode1() {
+        const code = editors.code1.getValue();
+        const output = document.getElementById('output1');
+        runJavaScript(code, output);
+      }
+      
+      function runCode2() {
+        const code = editors.code2.getValue();
+        const output = document.getElementById('output2');
+        runJavaScript(code, output);
+      }
+      
+      function runCode3() {
+        const code = editors.code3.getValue();
+        const output = document.getElementById('output3');
+        // Clear demo area
+        document.getElementById('demo-area').innerHTML = '<p class="text-gray-500">Run the code to see DOM manipulation in action!</p>';
+        runJavaScript(code, output);
+      }
+      
+      function runJavaScript(code, outputElement) {
+        const logs = [];
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        // Capture console outputs
+        console.log = (...args) => {
+          logs.push(args.map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+          ).join(' '));
+          originalLog.apply(console, args);
+        };
+        
+        console.error = (...args) => {
+          logs.push('ERROR: ' + args.map(arg => String(arg)).join(' '));
+          originalError.apply(console, args);
+        };
+        
+        console.warn = (...args) => {
+          logs.push('WARNING: ' + args.map(arg => String(arg)).join(' '));
+          originalWarn.apply(console, args);
+        };
+        
+        try {
+          // Execute the code
+          const result = eval(code);
+          
+          // Restore console functions
+          console.log = originalLog;
+          console.error = originalError;
+          console.warn = originalWarn;
+          
+          // Display output
+          if (logs.length > 0) {
+            outputElement.textContent = logs.join('\n');
+          } else if (result !== undefined) {
+            outputElement.textContent = String(result);
+          } else {
+            outputElement.textContent = "Code executed successfully (no output)";
+          }
+          
+        } catch (error) {
+          console.log = originalLog;
+          console.error = originalError;
+          console.warn = originalWarn;
+          outputElement.textContent = `Error: ${error.message}`;
+        }
+      }
+    </script>
+  </body>
+</html>

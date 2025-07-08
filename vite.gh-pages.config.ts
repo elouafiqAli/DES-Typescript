@@ -11,14 +11,18 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
-  root: path.resolve(__dirname, "client"),
-  base: './', // Use relative paths for GitHub Pages
+  root: ".", // Build from project root
+  base: "./", // Use relative paths for GitHub Pages
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: "dist",
     emptyOutDir: true,
-    assetsDir: 'assets',
     rollupOptions: {
       input: path.resolve(__dirname, "client", "index.github.html"),
+      output: {
+        entryFileNames: 'assets/[name].[hash].js',
+        chunkFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]'
+      }
     }
   },
   define: {

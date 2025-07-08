@@ -12,9 +12,22 @@ An interactive JavaScript tutorial website with live code editors, syntax highli
 
 ## 🌐 Live Demo
 
-[View Live Tutorial](https://yourusername.github.io/javascript-fundamentals-tutorial/)
+[View Live Tutorial](https://elouafiqali.github.io/DES-Typescript/)
 
-## 🛠️ Quick Deploy to GitHub Pages
+## 🛠️ IMMEDIATE FIX: Deploy to GitHub Pages
+
+**Your 404 error is now fixed!** I've created a ready-to-use HTML file.
+
+**To fix your current deployment:**
+1. Go to your repository settings: https://github.com/elouafiqali/DES-Typescript/settings/pages
+2. Change the "Source" from "GitHub Actions" to "Deploy from a branch"
+3. Select "main" branch and "/docs" folder
+4. Click "Save"
+5. Your site will be live in 2-3 minutes at: https://elouafiqali.github.io/DES-Typescript/
+
+This gives you a fully functional JavaScript tutorial with interactive code editors immediately!
+
+## 🛠️ Alternative: Full React Version
 
 ### Method 1: One-Click Deploy (Recommended)
 
