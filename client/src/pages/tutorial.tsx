@@ -5,6 +5,7 @@ import Sidebar from "@/components/tutorial/Sidebar";
 import CodeExample from "@/components/tutorial/CodeExample";
 import InteractiveExample from "@/components/tutorial/InteractiveExample";
 import TodoExample from "@/components/tutorial/TodoExample";
+import JSFiddleExample from "@/components/tutorial/JSFiddleExample";
 
 export default function Tutorial() {
   const isMobile = useIsMobile();
@@ -187,98 +188,117 @@ const evenNumbers = numbers.filter(num => num % 2 === 0);`}
 
             {/* Interactive Examples */}
             <section id="examples" className="mb-16">
-              <h2 className="text-3xl font-bold text-github-text mb-6">Interactive Examples</h2>
+              <h2 className="text-3xl font-bold text-github-text mb-6">Interactive Code Editor</h2>
               <p className="text-github-gray mb-6 leading-relaxed">
-                Try these interactive examples to practice what you've learned. Click the "Run Code" buttons to see the results.
+                Try writing and running JavaScript code directly in your browser! Edit the code on the left and see the results on the right.
               </p>
               
-              <InteractiveExample
-                title="Example 1: Simple Calculator"
-                code={`function calculator(a, b, operation) {
-    switch(operation) {
-        case 'add':
-            return a + b;
-        case 'subtract':
-            return a - b;
-        case 'multiply':
-            return a * b;
-        case 'divide':
-            return b !== 0 ? a / b : 'Cannot divide by zero';
-        default:
-            return 'Invalid operation';
-    }
+              <JSFiddleExample
+                title="JS Playground: Variables & Functions"
+                initialCode={`// Try modifying this code!
+let name = "Alice";
+let age = 25;
+
+function greet(person, years) {
+    return \`Hello \${person}! You are \${years} years old.\`;
 }
 
-// Test the calculator
-console.log(calculator(10, 5, 'add'));        // 15
-console.log(calculator(10, 5, 'multiply'));   // 50
-console.log(calculator(10, 0, 'divide'));     // Cannot divide by zero`}
-                onRun={() => {
-                  const results = [
-                    'calculator(10, 5, "add") = 15',
-                    'calculator(10, 5, "multiply") = 50',
-                    'calculator(10, 0, "divide") = "Cannot divide by zero"'
-                  ];
-                  return results.join('\n');
-                }}
+function calculateBirthYear(currentAge) {
+    return new Date().getFullYear() - currentAge;
+}
+
+// Run some code
+console.log(greet(name, age));
+console.log(\`Birth year: \${calculateBirthYear(age)}\`);
+
+// Try adding your own code below:
+// let yourName = "Your Name";
+// console.log(greet(yourName, 30));`}
+              />
+
+              <JSFiddleExample
+                title="JS Playground: Arrays & Objects"
+                initialCode={`// Working with arrays and objects
+const students = [
+    { name: "John", grade: 85, subject: "Math" },
+    { name: "Sarah", grade: 92, subject: "Science" },
+    { name: "Mike", grade: 78, subject: "English" }
+];
+
+// Function to calculate average grade
+function calculateAverage(studentList) {
+    const total = studentList.reduce((sum, student) => sum + student.grade, 0);
+    return total / studentList.length;
+}
+
+// Function to find top student
+function findTopStudent(studentList) {
+    return studentList.reduce((top, current) => 
+        current.grade > top.grade ? current : top
+    );
+}
+
+// Display results
+console.log("All students:", students);
+console.log("Average grade:", calculateAverage(students));
+console.log("Top student:", findTopStudent(students));
+
+// Try adding more students or functions!`}
+              />
+
+              <JSFiddleExample
+                title="JS Playground: DOM Manipulation"
+                htmlTemplate={`
+                  <div id="demo-container">
+                    <h2>DOM Demo</h2>
+                    <button id="colorBtn">Change Color</button>
+                    <button id="addBtn">Add Item</button>
+                    <button id="clearBtn">Clear All</button>
+                    <ul id="itemList"></ul>
+                    <p id="status">Ready to interact!</p>
+                  </div>
+                `}
+                initialCode={`// DOM Manipulation Example
+// This code runs after the HTML is loaded
+
+const colorBtn = document.getElementById('colorBtn');
+const addBtn = document.getElementById('addBtn');
+const clearBtn = document.getElementById('clearBtn');
+const itemList = document.getElementById('itemList');
+const status = document.getElementById('status');
+
+let itemCount = 0;
+const colors = ['red', 'blue', 'green', 'purple', 'orange'];
+
+// Change background color
+colorBtn.addEventListener('click', () => {
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    document.body.style.backgroundColor = randomColor;
+    status.textContent = \`Background changed to \${randomColor}!\`;
+});
+
+// Add list item
+addBtn.addEventListener('click', () => {
+    itemCount++;
+    const li = document.createElement('li');
+    li.textContent = \`Item #\${itemCount}\`;
+    li.style.margin = '5px 0';
+    itemList.appendChild(li);
+    status.textContent = \`Added item #\${itemCount}\`;
+});
+
+// Clear all items
+clearBtn.addEventListener('click', () => {
+    itemList.innerHTML = '';
+    itemCount = 0;
+    status.textContent = 'All items cleared!';
+});
+
+console.log('DOM manipulation demo loaded!');
+console.log('Click the buttons to see the page change!');`}
               />
 
               <TodoExample />
-
-              <InteractiveExample
-                title="Example 3: Data Processing"
-                code={`// Sample data processing
-const sales = [
-    { month: "Jan", amount: 1200 },
-    { month: "Feb", amount: 1500 },
-    { month: "Mar", amount: 980 },
-    { month: "Apr", amount: 1800 },
-    { month: "May", amount: 2200 }
-];
-
-// Calculate total sales
-const totalSales = sales.reduce((sum, sale) => sum + sale.amount, 0);
-
-// Find best performing month
-const bestMonth = sales.reduce((best, current) => 
-    current.amount > best.amount ? current : best
-);
-
-// Calculate average
-const averageSales = totalSales / sales.length;
-
-// Format results
-function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', { 
-        style: 'currency', 
-        currency: 'USD' 
-    }).format(amount);
-}`}
-                onRun={() => {
-                  const sales = [
-                    { month: "Jan", amount: 1200 },
-                    { month: "Feb", amount: 1500 },
-                    { month: "Mar", amount: 980 },
-                    { month: "Apr", amount: 1800 },
-                    { month: "May", amount: 2200 }
-                  ];
-                  
-                  const totalSales = sales.reduce((sum, sale) => sum + sale.amount, 0);
-                  const bestMonth = sales.reduce((best, current) => 
-                    current.amount > best.amount ? current : best
-                  );
-                  const averageSales = totalSales / sales.length;
-                  
-                  function formatCurrency(amount: number) {
-                    return new Intl.NumberFormat('en-US', { 
-                      style: 'currency', 
-                      currency: 'USD' 
-                    }).format(amount);
-                  }
-                  
-                  return `Total Sales: ${formatCurrency(totalSales)}\nBest Month: ${bestMonth.month} (${formatCurrency(bestMonth.amount)})\nAverage Sales: ${formatCurrency(averageSales)}`;
-                }}
-              />
             </section>
 
             {/* Next Steps */}
@@ -295,9 +315,9 @@ function formatCurrency(amount) {
                   <button className="bg-white border border-github-blue text-github-blue px-4 py-2 rounded-lg text-sm hover:bg-blue-50 transition-colors">
                     View Source Code
                   </button>
-                  <button className="bg-white border border-github-blue text-github-blue px-4 py-2 rounded-lg text-sm hover:bg-blue-50 transition-colors">
-                    Next Tutorial
-                  </button>
+                  <a href="/setup" className="bg-github-green text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition-colors inline-block">
+                    Deploy to GitHub Pages
+                  </a>
                 </div>
               </div>
             </section>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link } from "wouter";
 
 interface HeaderProps {
   mobileMenuOpen: boolean;
@@ -42,6 +43,9 @@ export default function Header({ mobileMenuOpen, setMobileMenuOpen }: HeaderProp
                 {item.label}
               </button>
             ))}
+            <Link href="/setup" className="text-github-gray hover:text-github-blue transition-colors">
+              GitHub Pages Setup
+            </Link>
           </nav>
           
           <button
