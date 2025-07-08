@@ -1,5 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { Play, RotateCcw } from "lucide-react";
+import CodeMirror from '@uiw/react-codemirror';
+import { javascript } from '@codemirror/lang-javascript';
+import { oneDark } from '@codemirror/theme-one-dark';
 
 interface JSFiddleExampleProps {
   title: string;
@@ -11,16 +14,16 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState<string>("");
   const [htmlOutput, setHtmlOutput] = useState<string>("");
-  const codeRef = useRef<HTMLElement>(null);
+  const [isRunning, setIsRunning] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  useEffect(() => {
-    if (codeRef.current && typeof window !== 'undefined' && (window as any).Prism) {
-      (window as any).Prism.highlightElement(codeRef.current);
-    }
-  }, [code]);
+  // CodeMirror extensions and configuration
+  const extensions = [javascript({ jsx: true })];
 
-  const handleRunCode = () => {
+  const handleRunCode = async () => {
+    if (isRunning) return;
+    
+    setIsRunning(true);
     try {
       // Clear previous output
       setOutput("");
@@ -102,9 +105,11 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
       setOutput(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
       
       // Restore console functions in case of error
-      console.log = console.log;
-      console.error = console.error;
-      console.warn = console.warn;
+      console.log = originalLog;
+      console.error = originalError;
+      console.warn = originalWarn;
+    } finally {
+      setIsRunning(false);
     }
   };
 
@@ -131,10 +136,11 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
           </button>
           <button
             onClick={handleRunCode}
-            className="bg-github-blue text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors flex items-center gap-2"
+            disabled={isRunning}
+            className="bg-github-blue text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <Play className="w-4 h-4" />
-            Run Code
+            <Play className={`w-4 h-4 ${isRunning ? 'animate-spin' : ''}`} />
+            {isRunning ? 'Running...' : 'Run Code'}
           </button>
         </div>
       </div>
@@ -143,12 +149,31 @@ export default function JSFiddleExample({ title, initialCode, htmlTemplate }: JS
         {/* Code Editor */}
         <div className="p-4 border-b lg:border-b-0 lg:border-r border-gray-200">
           <h4 className="font-medium text-github-text mb-2">JavaScript Code:</h4>
-          <textarea
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            className="w-full h-64 p-3 border border-gray-300 rounded-md font-mono text-sm focus:outline-none focus:ring-2 focus:ring-github-blue resize-none"
-            placeholder="Write your JavaScript code here..."
-          />
+          <div className="border border-gray-300 rounded-md overflow-hidden">
+            <CodeMirror
+              value={code}
+              height="320px"
+              extensions={extensions}
+              theme={oneDark}
+              onChange={(value) => setCode(value)}
+              basicSetup={{
+                lineNumbers: true,
+                highlightActiveLineGutter: true,
+                highlightSpecialChars: true,
+                history: true,
+                foldGutter: true,
+                drawSelection: true,
+                dropCursor: true,
+                allowMultipleSelections: true,
+                indentOnInput: true,
+                bracketMatching: true,
+                closeBrackets: true,
+                autocompletion: true,
+                highlightSelectionMatches: true,
+                searchKeymap: true
+              }}
+            />
+          </div>
         </div>
         
         {/* Output */}
